@@ -30,6 +30,7 @@
 
 
 * **_DRY_** Principle: Don’t Repeat Yourself
+* **_YAGNI_** Principle: You ain't gonna need it (add complexity when needed)
 
 
 ## Naming
@@ -150,4 +151,21 @@ return total;
     ```angular2html
     bool goingToChipotleForLunch = cashInWallet > 6.00;
     ```
-  
+
+### Ternary is Beautiful:
+* Bad way:
+```angular2html
+int registrationFee;
+if (isSpeaker)
+{
+    registrationFee = 0;
+}
+else
+{
+    registrationFee = 50;
+}
+```
+* Good way:
+```angular2html
+int registrationFee = isSpeaker ? 0 : 50;
+```
