@@ -169,3 +169,30 @@ else
 ```angular2html
 int registrationFee = isSpeaker ? 0 : 50;
 ```
+
+### Avoid Magic Numbers:
+* Bad code:
+```angular2html
+if (age > 21)
+{
+    // body here
+}
+
+if (status == 2)
+{
+    // body here
+}
+```
+* Good code:
+```angular2html
+const int legalVoterAge = 18;
+if (age > legalVoterAge)
+{
+    // body here
+}
+
+if (status == Status.active)
+{
+    // body here
+}
+```
