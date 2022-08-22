@@ -221,37 +221,98 @@ return total;
     }
     ```
 
-  - **_Encapsulate Complex Conditionals_**:
-    * Principle: Favor expressive code over comments
-    * Bad approach:
-      ```angular2html
-      // check for valid file extensions, confirm is admin or active
-      if ( (fileExt == ".mp4"
-          || fileExt == ".mpg"
-          || fileExt == ".avi")
-          && (isAdmin == 1 || isActiveFile)
-      )
-      ```
-    * Good approach:
+- **_Encapsulate Complex Conditionals_**:
+  * Principle: Favor expressive code over comments
+  * Bad approach:
+    ```angular2html
+    // check for valid file extensions, confirm is admin or active
+    if ( (fileExt == ".mp4"
+        || fileExt == ".mpg"
+        || fileExt == ".avi")
+        && (isAdmin == 1 || isActiveFile)
+    )
+    ```
+  * Good approach:
+    ```angular2html
+    private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
+    {
+        return (fileExt == ".mp4"
+            || fileExt == ".mpg"
+            || fileExt == ".avi")
+            && (isAdmin == 1 || isActiveFile)
+    }
+    ```
+  * Better approach:
       ```angular2html
       private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
       {
-          return (fileExt == ".mp4"
-              || fileExt == ".mpg"
-              || fileExt == ".avi")
-              && (isAdmin == 1 || isActiveFile)
+          var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
+        
+          bool validFileType = validFileExtensions.Contains(fileExtension);
+          bool userIsAllowedToViewFile = isAdmin && isActiveFile;
+    
+          return validFileType && userIsAllowedToViewFile;
       }
       ```
-    * Better approach:
-        ```angular2html
-        private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
-        {
-            var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
-        
-            bool validFileType = validFileExtensions.Contains(fileExtension);
-            bool userIsAllowedToViewFile = isAdmin && isActiveFile;
+
+- **_Favor Polymorphism Over Switch and Enums_**:
+* Bad approach:
+```angular2html
+public void LoginUser(User user)
+{
+    switch (user.Status)
+    {
+        case Status.Active:
+            // active user logic
+            break
+        case Status.Inactive:
+            // inactive user logic
+            break
+        case Status.Locked:
+            // locked user logic
+            break
+    }
+}
+```
+* Good approach:
+```angular2html
+public void LoginUser(User user)
+{
+    user.Login();
+}
+
+public abstract class User
+{
+    public string FirstName;
+    public string LastName;
+    public int status;
+    public int AccountBalance;
     
-            return validFileType && userIsAllowedToViewFile;
-        }
-        ```
-  
+    public abstract void Login();
+}
+
+public class ActiveUser: User
+{
+    public override void Login()
+    {
+        // Active user logic here
+    }
+}
+
+public class InactiveUser: User
+{
+    public override void Login()
+    {
+        // Inactive user logic here
+    }
+}
+
+public class LockedUser: User
+{
+    public override void Login()
+    {
+        // Locked user logic here
+    }
+}
+```
+- Each class knows hor to handle its unique behaviours. So no redundant switches are required.
