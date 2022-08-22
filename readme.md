@@ -111,24 +111,43 @@ return total;
 
 
 - **_Naming Variables: Boolean_**:
-    * Bad naming:
-      - open
-      - start
-      - status
-      - login
-      ```angular2html
-      if (login) {
-        ...  
-      }
-      ```
-        * Good naming:
-          - isOpen
-          - done
-          - isActive
-          - LoggedIn
-      ```angular2html
-      if (loggedIn) {
-        ...  
-      }
-      ```
+  * Bad naming:
+    - open
+    - start
+    - status
+    - login
+    ```angular2html
+    if (login) {
+      ...  
+    }
+    ```
+  * Good naming:
+    - isOpen
+    - done
+    - isActive
+    - LoggedIn
+    ```angular2html
+    if (loggedIn) {
+    ...  
+    }
+    ```
     
+## Writing Conditionals That Convey Intent
+### Boolean Assignments:
+* Bad way:
+    ```angular2html
+    bool goingToChipotleForLunch;
+    if (cashInWallet > 6.00)
+    {
+        goingToChipotleForLunch = true;
+    }
+    else
+    {
+        goingToChipotleForLunch = false;
+    }
+    ```
+* Good way:
+    ```angular2html
+    bool goingToChipotleForLunch = cashInWallet > 6.00;
+    ```
+  
