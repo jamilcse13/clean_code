@@ -255,7 +255,7 @@ return total;
       }
       ```
 
-- **_Favor Polymorphism Over Switch and Enums_**:
+### Favor Polymorphism Over Switch and Enums:
   * Bad approach:
       ```angular2html
       public void LoginUser(User user)
@@ -316,3 +316,27 @@ return total;
       }
       ```
   - Each class knows hor to handle its unique behaviours. So no redundant switches are required.
+
+
+### Be declarative:
+* Bad approach:
+    ```angular2html
+    List<User> matchingUsers = new List<User>();
+    
+    foreach (var user in users)
+    {
+        if (user.AccountBalance < minAccountBalance
+            && user.Status == status.Active)
+        {
+            matchingUsers.Add(user);
+        }
+    }
+    return matchingUsers;
+    ```
+* Good approach:
+    ```angular2html
+    return users
+        .where(u => u.AccountBalance < minAccountBalance)
+        .where(u => u.Status < status.Active);
+    ```
+
