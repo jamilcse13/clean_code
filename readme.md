@@ -154,45 +154,104 @@ return total;
 
 ### Ternary is Beautiful:
 * Bad way:
-```angular2html
-int registrationFee;
-if (isSpeaker)
-{
-    registrationFee = 0;
-}
-else
-{
-    registrationFee = 50;
-}
-```
+    ```angular2html
+    int registrationFee;
+    if (isSpeaker)
+    {
+        registrationFee = 0;
+    }
+    else
+    {
+        registrationFee = 50;
+    }
+    ```
 * Good way:
-```angular2html
-int registrationFee = isSpeaker ? 0 : 50;
-```
+    ```angular2html
+    int registrationFee = isSpeaker ? 0 : 50;
+    ```
 
 ### Avoid Magic Numbers:
 * Bad code:
-```angular2html
-if (age > 21)
-{
-    // body here
-}
-
-if (status == 2)
-{
-    // body here
-}
-```
+    ```angular2html
+    if (age > 21)
+    {
+        // body here
+    }
+    
+    if (status == 2)
+    {
+        // body here
+    }
+    ```
 * Good code:
-```angular2html
-const int legalVoterAge = 18;
-if (age > legalVoterAge)
-{
-    // body here
-}
+    ```angular2html
+    const int legalVoterAge = 18;
+    if (age > legalVoterAge)
+    {
+        // body here
+    }
+    
+    if (status == Status.active)
+    {
+        // body here
+    }
+    ```
 
-if (status == Status.active)
-{
-    // body here
-}
-```
+
+### Handling Complex Conditions:
+- **_Intermediate Variables_**:
+* Bad approach:
+    ```angular2html
+    if (employee.Age >55
+    && employee.YearsEmployed > 10
+    && employee.IsRetired == true)
+    {
+        // body here
+    }
+    ```
+* Good approach:
+    ```angular2html
+    bool eligibleFOrPension = employee.Age >55
+    && employee.YearsEmployed > 10
+    && employee.IsRetired == true;
+    
+    if (eligibleFOrPension)
+    {
+        // body here
+    }
+    ```
+
+  - **_Encapsulate Complex Conditionals_**:
+    * Principle: Favor expressive code over comments
+    * Bad approach:
+      ```angular2html
+      // check for valid file extensions, confirm is admin or active
+      if ( (fileExt == ".mp4"
+          || fileExt == ".mpg"
+          || fileExt == ".avi")
+          && (isAdmin == 1 || isActiveFile)
+      )
+      ```
+    * Good approach:
+      ```angular2html
+      private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
+      {
+          return (fileExt == ".mp4"
+              || fileExt == ".mpg"
+              || fileExt == ".avi")
+              && (isAdmin == 1 || isActiveFile)
+      }
+      ```
+    * Better approach:
+        ```angular2html
+        private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
+        {
+            var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
+        
+            bool validFileType = validFileExtensions.Contains(fileExtension);
+            bool userIsAllowedToViewFile = isAdmin && isActiveFile;
+    
+            return validFileType && userIsAllowedToViewFile;
+        }
+        ```
+  
