@@ -59,7 +59,7 @@ return total;
 ```
 
 ### Naming Classes and Methods:
-- Class
+- **_Class_**
   * Bad naming:
       * WebsiteBO
       * Utility
@@ -78,7 +78,8 @@ return total;
     - Single Responsibility
     - Avoid generic suffixes: A class that contains products business logic should be named *Product* not *ProductManager* or *ProductInfo*
 
-- Method:
+
+- **_Method_**:
     * Bad naming: when a user read the method name, he won't understand what's its responsibility
         - Go
         - Complete
@@ -87,9 +88,47 @@ return total;
         - Dolt
         - Start
         - Page_Load
-      * Good naming: With good method name, the reader doesn't need to read the method to know what it does. These are self-explanatory names.
-        - GetRegisteredUsers
-        - IsValidSubmissions
-        - ImportDocument
-        - SendMail
-        - LoadPage
+    * Good naming: With good method name, the reader doesn't need to read the method to know what it does. These are self-explanatory names.
+      - GetRegisteredUsers
+      - IsValidSubmissions
+      - ImportDocument
+      - SendMail
+      - LoadPage
+
+
+- **_Avoid_**:
+    - Side Effects:
+      - mismatch method name and work
+      - Exm: UserInfo method sends email
+    - Warning Signs:
+        - and, or, if
+        - Don't user method name like
+          - CalculateAndDisplay
+          - ProcessOrDeny
+    - Abbreviation:
+      - RegUsr
+      - RegisUser
+
+
+- **_Naming Variables: Boolean_**:
+    * Bad naming:
+      - open
+      - start
+      - status
+      - login
+      ```angular2html
+      if (login) {
+        ...  
+      }
+      ```
+        * Good naming:
+          - isOpen
+          - done
+          - isActive
+          - LoggedIn
+      ```angular2html
+      if (loggedIn) {
+        ...  
+      }
+      ```
+    
