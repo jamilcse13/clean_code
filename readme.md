@@ -33,7 +33,7 @@
 
 
 ## Naming
-### Why Naming Matters
+### Why Naming Matters:
 * To maintain code readability
 * To avoid variable confliction
 * To understand the intent of the variable
@@ -57,3 +57,39 @@ foreach(var i in prices)
 }
 return total;
 ```
+
+### Naming Classes and Methods:
+- Class
+  * Bad naming:
+      * WebsiteBO
+      * Utility
+      * Common
+      * MyFunctions
+      * JimmysUtils
+      * Manager/Processor/Info
+  * Good naming:
+      * User
+      * Account
+      * QueryBuilder
+      * productRepository
+  * Naming Guidelines:
+    - Noun: Good class names are noun, not verbs
+    - Be Specific
+    - Single Responsibility
+    - Avoid generic suffixes: A class that contains products business logic should be named *Product* not *ProductManager* or *ProductInfo*
+
+- Method:
+    * Bad naming: when a user read the method name, he won't understand what's its responsibility
+        - Go
+        - Complete
+        - Get
+        - Process
+        - Dolt
+        - Start
+        - Page_Load
+      * Good naming: With good method name, the reader doesn't need to read the method to know what it does. These are self-explanatory names.
+        - GetRegisteredUsers
+        - IsValidSubmissions
+        - ImportDocument
+        - SendMail
+        - LoadPage
