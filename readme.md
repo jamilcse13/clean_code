@@ -256,63 +256,63 @@ return total;
       ```
 
 - **_Favor Polymorphism Over Switch and Enums_**:
-* Bad approach:
-```angular2html
-public void LoginUser(User user)
-{
-    switch (user.Status)
-    {
-        case Status.Active:
-            // active user logic
-            break
-        case Status.Inactive:
-            // inactive user logic
-            break
-        case Status.Locked:
-            // locked user logic
-            break
-    }
-}
-```
-* Good approach:
-```angular2html
-public void LoginUser(User user)
-{
-    user.Login();
-}
-
-public abstract class User
-{
-    public string FirstName;
-    public string LastName;
-    public int status;
-    public int AccountBalance;
+  * Bad approach:
+      ```angular2html
+      public void LoginUser(User user)
+      {
+          switch (user.Status)
+          {
+              case Status.Active:
+                  // active user logic
+                  break
+              case Status.Inactive:
+                  // inactive user logic
+                  break
+              case Status.Locked:
+                  // locked user logic
+                  break
+          }
+      }
+      ```
+  * Good approach:
+      ```angular2html
+      public void LoginUser(User user)
+      {
+          user.Login();
+      }
     
-    public abstract void Login();
-}
-
-public class ActiveUser: User
-{
-    public override void Login()
-    {
-        // Active user logic here
-    }
-}
-
-public class InactiveUser: User
-{
-    public override void Login()
-    {
-        // Inactive user logic here
-    }
-}
-
-public class LockedUser: User
-{
-    public override void Login()
-    {
-        // Locked user logic here
-    }
-}
-```
-- Each class knows hor to handle its unique behaviours. So no redundant switches are required.
+      public abstract class User
+      {
+          public string FirstName;
+          public string LastName;
+          public int status;
+          public int AccountBalance;
+        
+          public abstract void Login();
+      }
+    
+      public class ActiveUser: User
+      {
+          public override void Login()
+          {
+              // Active user logic here
+          }
+      }
+    
+      public class InactiveUser: User
+      {
+          public override void Login()
+          {
+              // Inactive user logic here
+          }
+      }
+    
+      public class LockedUser: User
+      {
+          public override void Login()
+          {
+              // Locked user logic here
+          }
+      }
+      ```
+  - Each class knows hor to handle its unique behaviours. So no redundant switches are required.
