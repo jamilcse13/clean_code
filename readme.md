@@ -513,3 +513,35 @@ return total;
 
       return IsUniqueUsername(username);
       ```
+
+- **_Solution of Excessive Indentation:_**
+    - Convey Intent
+    - Old Code:
+        ```angular2html
+        private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
+        {
+            if ((fileExt == ".mp4" || fileExt == ".mpg" || fileExt == ".avi")
+               && (isAdmin == 1 || isActiveFile))
+        }
+        ```
+    - After refactor:
+        ```angular2html
+        private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
+        {
+            var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
+        
+            bool validFileType = validFileExtensions.Contains(fileExtension);
+            bool userIsAllowedToViewFile = isAdmin && isActiveFile;
+    
+            return validFileType && userIsAllowedToViewFile;
+        }
+        ```
+
+- **_Do One Thing:_**
+    - A function have just single responsibility
+    - Advantage:
+        - Aids the reader
+        - Promotes reuse
+        - Eases naming and testing
+        - Avoids side-effects
+  
