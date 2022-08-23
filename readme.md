@@ -200,26 +200,26 @@ return total;
 
 ### Handling Complex Conditions:
 - **_Intermediate Variables_**:
-* Bad approach:
-    ```angular2html
-    if (employee.Age >55
-    && employee.YearsEmployed > 10
-    && employee.IsRetired == true)
-    {
-        // body here
-    }
-    ```
-* Good approach:
-    ```angular2html
-    bool eligibleFOrPension = employee.Age >55
-    && employee.YearsEmployed > 10
-    && employee.IsRetired == true;
+  * Bad approach:
+      ```angular2html
+      if (employee.Age >55
+      && employee.YearsEmployed > 10
+      && employee.IsRetired == true)
+      {
+          // body here
+      }
+      ```
+  * Good approach:
+      ```angular2html
+      bool eligibleFOrPension = employee.Age >55
+      && employee.YearsEmployed > 10
+      && employee.IsRetired == true;
     
-    if (eligibleFOrPension)
-    {
-        // body here
-    }
-    ```
+      if (eligibleFOrPension)
+      {
+          // body here
+      }
+      ```
 
 - **_Encapsulate Complex Conditionals_**:
   * Principle: Favor expressive code over comments
@@ -340,3 +340,37 @@ return total;
         .where(u => u.Status < status.Active);
     ```
 
+### Table Driven Method:
+* Great for dynamic logic
+* Avoids hard coding
+* Write less code
+* Avoids complex data structure
+* Make changes without a code deployment
+* Example -
+* Bad approach:
+    ```angular2html
+    if (age < 20)
+    {
+        return 345.60;
+    }
+    else if(age < 30)
+    {
+        return 319.50;
+    }
+    else if (age < 40)
+    {
+        return 376.38;
+    }
+    else if (age < 50)
+    {
+        return 516.25;
+    }
+    ```
+* Good approach
+  - Consider using the DB
+  - store the data to a data table. Let table name: InsuranceRate
+  - It has InsuranceRateId, MaximumAge, Rate
+  ```angular2html
+  return Repository.GetInsuranceRate(age);
+  ```
+  
