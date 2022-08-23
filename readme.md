@@ -38,7 +38,7 @@
 * To maintain code readability
 * To avoid variable confliction
 * To understand the intent of the variable
-```angular2html
+```javascript
 // bad practice
 List<decimal> p = new List<decimal>() {5.50, 1.48};
 decimal t = 0;
@@ -48,7 +48,7 @@ foreach(var i in p)
 }
 return t;
 ```
-```angular2html
+```javascript
 // good practice
 List<decimal> prices = new List<decimal>() {5.50, 1.48};
 decimal total = 0;
@@ -117,7 +117,7 @@ return total;
     - start
     - status
     - login
-    ```angular2html
+    ```javascript
     if (login) {
       ...  
     }
@@ -127,7 +127,7 @@ return total;
     - done
     - isActive
     - LoggedIn
-    ```angular2html
+    ```javascript
     if (loggedIn) {
     ...  
     }
@@ -136,7 +136,7 @@ return total;
 ## Writing Conditionals That Convey Intent
 ### Boolean Assignments:
 * Bad way:
-    ```angular2html
+    ```javascript
     bool goingToChipotleForLunch;
     if (cashInWallet > 6.00)
     {
@@ -148,13 +148,13 @@ return total;
     }
     ```
 * Good way:
-    ```angular2html
+    ```javascript
     bool goingToChipotleForLunch = cashInWallet > 6.00;
     ```
 
 ### Ternary is Beautiful:
 * Bad way:
-    ```angular2html
+    ```javascript
     int registrationFee;
     if (isSpeaker)
     {
@@ -166,13 +166,13 @@ return total;
     }
     ```
 * Good way:
-    ```angular2html
+    ```javascript
     int registrationFee = isSpeaker ? 0 : 50;
     ```
 
 ### Avoid Magic Numbers:
 * Bad code:
-    ```angular2html
+    ```javascript
     if (age > 21)
     {
         // body here
@@ -184,7 +184,7 @@ return total;
     }
     ```
 * Good code:
-    ```angular2html
+    ```javascript
     const int legalVoterAge = 18;
     if (age > legalVoterAge)
     {
@@ -201,7 +201,7 @@ return total;
 ### Handling Complex Conditions:
 - **_Intermediate Variables_**:
   * Bad approach:
-      ```angular2html
+      ```javascript
       if (employee.Age >55
       && employee.YearsEmployed > 10
       && employee.IsRetired == true)
@@ -210,7 +210,7 @@ return total;
       }
       ```
   * Good approach:
-      ```angular2html
+      ```javascript
       bool eligibleFOrPension = employee.Age >55
       && employee.YearsEmployed > 10
       && employee.IsRetired == true;
@@ -224,7 +224,7 @@ return total;
 - **_Encapsulate Complex Conditionals_**:
   * Principle: Favor expressive code over comments
   * Bad approach:
-    ```angular2html
+    ```javascript
     // check for valid file extensions, confirm is admin or active
     if ( (fileExt == ".mp4"
         || fileExt == ".mpg"
@@ -233,7 +233,7 @@ return total;
     )
     ```
   * Good approach:
-    ```angular2html
+    ```javascript
     private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
     {
         return (fileExt == ".mp4"
@@ -243,7 +243,7 @@ return total;
     }
     ```
   * Better approach:
-      ```angular2html
+      ```javascript
       private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
       {
           var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
@@ -257,7 +257,7 @@ return total;
 
 ### Favor Polymorphism Over Switch and Enums:
   * Bad approach:
-      ```angular2html
+      ```javascript
       public void LoginUser(User user)
       {
           switch (user.Status)
@@ -275,7 +275,7 @@ return total;
       }
       ```
   * Good approach:
-      ```angular2html
+      ```javascript
       public void LoginUser(User user)
       {
           user.Login();
@@ -320,7 +320,7 @@ return total;
 
 ### Be declarative:
 * Bad approach:
-    ```angular2html
+    ```javascript
     List<User> matchingUsers = new List<User>();
     
     foreach (var user in users)
@@ -334,7 +334,7 @@ return total;
     return matchingUsers;
     ```
 * Good approach:
-    ```angular2html
+    ```javascript
     return users
         .where(u => u.AccountBalance < minAccountBalance)
         .where(u => u.Status < status.Active);
@@ -348,7 +348,7 @@ return total;
 * Make changes without a code deployment
 * Example -
 * Bad approach:
-    ```angular2html
+    ```javascript
     if (age < 20)
     {
         return 345.60;
@@ -370,7 +370,7 @@ return total;
   - Consider using the DB
   - store the data to a data table. Let table name: InsuranceRate
   - It has InsuranceRateId, MaximumAge, Rate
-  ```angular2html
+  ```javascript
   return Repository.GetInsuranceRate(age);
   ```
   
@@ -392,7 +392,7 @@ return total;
 - **_Solution of Excessive Indentation:_**
     - _Extract Method_:
       - Before:
-          ```angular2html
+          ```javascript
           if
             if
               while
@@ -406,7 +406,7 @@ return total;
           ```
       
       - After:
-          ```angular2html
+          ```javascript
           if
             if
               doComplicatedThing()
@@ -423,7 +423,7 @@ return total;
     - _Fail Fast_:
         - throw exception as early as possible
         - Bad way:
-            ```angular2html
+            ```javascript
             public void RegisterUser(string username, string password)
             {
                 if (!string.IsNullOrWhitespace(username)) {
@@ -439,7 +439,7 @@ return total;
             ```
         
         - Good way:
-            ```angular2html
+            ```javascript
              public void RegisterUser(string username, string password)
              {
                if (!string.IsNullOrWhitespace(username)) {
@@ -452,7 +452,7 @@ return total;
              }
              ```
       - Every switch should have a default statement. If the cases in switch fails, then the default statement will execute.
-        ```angular2html
+        ```javascript
         public void LoginUser(User user)
         {
             switch (user.Status)
@@ -475,7 +475,7 @@ return total;
     - `Use a return when it enhances readability... In certain routines, once you know the answer...not returning  immediately means  that you have to write more code, - Steve McConnell, "Code Complete"`
     
     - Old Code:
-        ```angular2html
+        ```javascript
         private bool ValidUsername(string username)
         {
             bool isValid = false;
@@ -499,7 +499,7 @@ return total;
         }
         ```
     - After Refactor:
-      ```angular2html
+      ```javascript
       const int MinUsernameLength = 6;
       if (username.Length < MinUsernameLength) return false;
 
@@ -517,7 +517,7 @@ return total;
 - **_Solution of Excessive Indentation:_**
     - Convey Intent
     - Old Code:
-        ```angular2html
+        ```javascript
         private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
         {
             if ((fileExt == ".mp4" || fileExt == ".mpg" || fileExt == ".avi")
@@ -525,7 +525,7 @@ return total;
         }
         ```
     - After refactor:
-        ```angular2html
+        ```javascript
         private bool ValidFileRequest(string fileExtension, bool isActiveFile, bool isAdmin)
         {
             var validFileExtensions = new List<string>() {"mp4", "mpg", "avi"};
@@ -550,7 +550,7 @@ return total;
 * But we should strive for 0-2 parameters
 * Focus on writing small focused functions
 * Bad Way:
-    ```angular2html
+    ```javascript
     public void SaveUser(User user, bool sendEmail, int emailFormat,
         bool printReport, bool sendBill)
     ```
@@ -559,7 +559,7 @@ return total;
   * They should be handled, therefore, in separate functions
 * Avoid Flag Arguments (bool parameters)
   * Bad Approach:
-    ```angular2html
+    ```javascript
     private void SaveUser(User user, bool emailUser)
     {
        // save user here, then
@@ -570,7 +570,7 @@ return total;
     }
     ```
   * Good Approach:
-    ```angular2html
+    ```javascript
     private void SaveUser(User user)
     {
         // save user
@@ -617,7 +617,7 @@ return total;
 **_handle Try Catch Block:_**
 * Bad Approach:
   * if the RegisterSpeaker() method fails, then it should move on.  
-  ```angular2html
+  ```javascript
   try
   {
       RegisterSpeaker();
@@ -630,7 +630,7 @@ return total;
   ```
 * Good Approach:
   * if the RegisterSpeaker() method fails, then it should handle and stop the process.
-  ```angular2html
+  ```javascript
   RegisterSpeaker()
   EmailSpeaker()
   ```
@@ -638,7 +638,7 @@ return total;
 * Keep try catch block easily readable
 * Consider moving the body of the try into a well-named function
 * Bad Way:
-    ```angular2html
+    ```javascript
     try
     {
         // many lines
@@ -652,7 +652,7 @@ return total;
     
     ```
 * Good Way:
-    ```angular2html
+    ```javascript
     try
     {
         saveThePlanet();
@@ -669,4 +669,5 @@ return total;
         // logic here
     }
     ```
+
 
