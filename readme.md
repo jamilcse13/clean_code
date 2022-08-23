@@ -544,4 +544,41 @@ return total;
         - Promotes reuse
         - Eases naming and testing
         - Avoids side-effects
+
+### How Many Parameters:
+* Follow 7 Rules
+* But we should strive for 0-2 parameters
+* Focus on writing small focused functions
+* Bad Way:
+    ```angular2html
+    public void SaveUser(User user, bool sendEmail, int emailFormat,
+        bool printReport, bool sendBill)
+    ```
+* Good Way:
+  * Emails, printing, and billing are separate concerns from saving a user
+  * They should be handled, therefore, in separate functions
+* Avoid Flag Arguments (bool parameters)
+  * Bad Approach:
+    ```angular2html
+    private void SaveUser(User user, bool emailUser)
+    {
+       // save user here, then
+       if (emailUser)
+       {
+          // email user
+       }
+    }
+    ```
+  * Good Approach:
+    ```angular2html
+    private void SaveUser(User user)
+    {
+        // save user
+    }
+
+    private void EmailUser(User user)
+    {
+        // email user
+    }
+    ```
   
