@@ -670,4 +670,34 @@ return total;
     }
     ```
 
+## Writing Clean Classes
+### When To Create a Class:
+* New Concept
+  * Abstract or real-world
+* Low Cohesion
+  * Methods should relate
+* Promote Reuse
+  * Small, targeted => reuse
+* Reduce Complexity
+  * Solve once, hide away
+* Clarify Parameters
+  * Identify a group of data
+  
+
+### Class Cohesion:
+* **Cohesion:** How strongly the responsibilities of a class are related.
+* Cohesive Classes:
+  * Enhances responsibility
+  * Increases likelihood of reuse
+    * Highly cohesive classes are more like to be reused
+  * Avoids attracting the lazy
+    * Classes are often given overly generic names that attract lazy developers who don't want to think about where the logic truly belongs
+    * To avoid lazy developers: keep class names specific and descriptive to keep cohesion high.
+
+
+* To avoid creating low cohesive classes, focus on:
+  * Standalone methods
+  * Fields used by only one method
+  * Classes that change often
+
 
