@@ -581,4 +581,20 @@ return total;
         // email user
     }
     ```
-  
+
+### Signs a Method is Too Long:
+* Too Long Whitespace and Comments
+* Scrolling Required
+* Naming Issues
+  * A function  should be easy to name if it has a single, clear, and defined task
+  * If it is tough to name a function by its task, then refactor it into separate functions
+* Multiple Conditionals
+  * When multiple conditionals exist in a function, consider separate function to extract out the conditional
+* Hard to Digest
+  * Consider the rule of 7
+  * if a function has more than one layer of abstraction at a time, then it should refactor. Each function should work with a single layer of abstraction.
+
+
+* **Bob Martin** says in his book _Clean Code_: 
+  * A function should rarely be over 20 lines and hardly ever over 100 lines.
+  * A function shouldn't have more than 3 parameters.
