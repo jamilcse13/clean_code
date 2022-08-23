@@ -386,7 +386,7 @@ return total;
       - Code Duplication
       - Excessive Indentation
       - Unclear intent 
-      - More than 1 task
+      - More than 1 task/ multiple tasks
 
 
 - **_Solution of Excessive Indentation:_**
@@ -598,3 +598,75 @@ return total;
 * **Bob Martin** says in his book _Clean Code_: 
   * A function should rarely be over 20 lines and hardly ever over 100 lines.
   * A function shouldn't have more than 3 parameters.
+
+### Handling Exceptions:
+**_Exception Types:_**
+* Unrecoverable
+  * Null Reference
+  * File not found
+  * Access denied
+* Recoverable:
+  * Retry connection
+  * Try different file
+  * Wait and try again
+* Ignorable
+  * Logging click
+  
+**Only catch exceptions, you can handle. Can't handle the exception? - Fail fast, Fail loud**
+
+**_handle Try Catch Block:_**
+* Bad Approach:
+  * if the RegisterSpeaker() method fails, then it should move on.  
+  ```angular2html
+  try
+  {
+      RegisterSpeaker();
+  }
+  catch(Exception e)
+  {
+      LogError(e)
+  }
+  EmailSpeaker();
+  ```
+* Good Approach:
+  * if the RegisterSpeaker() method fails, then it should handle and stop the process.
+  ```angular2html
+  RegisterSpeaker()
+  EmailSpeaker()
+  ```
+
+* Keep try catch block easily readable
+* Consider moving the body of the try into a well-named function
+* Bad Way:
+    ```angular2html
+    try
+    {
+        // many lines
+        // of complicated
+        // logic here
+    }
+    catch (Exception e)
+    {
+        // do something
+    }
+    
+    ```
+* Good Way:
+    ```angular2html
+    try
+    {
+        saveThePlanet();
+    }
+    catch (Exception e)
+    {
+        // do something
+    }
+    
+    private void saveThePlanet()
+    {
+        // many lines
+        // of complicated
+        // logic here
+    }
+    ```
+
