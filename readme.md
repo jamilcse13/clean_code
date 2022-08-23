@@ -374,3 +374,142 @@ return total;
   return Repository.GetInsuranceRate(age);
   ```
   
+## Writing Clean Methods
+### When To Create a Function
+- **_Function vs Method:_**
+    - Both functions and methods are pieces of code, called by name
+    - Core difference: **Methods** are associated with an object
+
+
+- **_Reasons of writing function:_**
+    - To Avoid
+      - Code Duplication
+      - Excessive Indentation
+      - Unclear intent 
+      - More than 1 task
+
+
+- **_Solution of Excessive Indentation:_**
+    - _Extract Method_:
+      - Before:
+          ```angular2html
+          if
+            if
+              while
+                do
+                some
+                complicated
+                thing
+              end while
+            end if
+          end if
+          ```
+      
+      - After:
+          ```angular2html
+          if
+            if
+              doComplicatedThing()
+            end if
+          end if
+
+          doComplicatedThing()
+          {
+            while
+              do some complicated thing
+            end while
+          }
+          ```
+    - _Fail Fast_:
+        - throw exception as early as possible
+        - Bad way:
+            ```angular2html
+            public void RegisterUser(string username, string password)
+            {
+                if (!string.IsNullOrWhitespace(username)) {
+                    if (!string.IsNullOrWhitespace(password)) {
+                        // register user
+                    } else {
+                        throw new ArgumentException("Password is Required.");
+                    }
+                } else {
+                    throw new ArgumentException("Username is Required.");
+                }
+            }
+            ```
+        
+        - Good way:
+            ```angular2html
+             public void RegisterUser(string username, string password)
+             {
+               if (!string.IsNullOrWhitespace(username)) {
+                   throw new ArgumentException("Username is Required.");
+               }
+      
+               if (!string.IsNullOrWhitespace(password)) {
+                    throw new ArgumentException("Password is Required.");
+               }
+             }
+             ```
+      - Every switch should have a default statement. If the cases in switch fails, then the default statement will execute.
+        ```angular2html
+        public void LoginUser(User user)
+        {
+            switch (user.Status)
+            {
+               case Status.Active:
+                  // active user logic
+                  break
+               case Status.Inactive:
+                  // inactive user logic
+                  break
+               case Status.Locked:
+                  // locked user logic
+                  break
+               default:
+                  throw new ApplicationException("Unknown status: " + user.Status)
+            }
+        }
+        ```
+  - _Return Early_:
+    - `Use a return when it enhances readability... In certain routines, once you know the answer...not returning  immediately means  that you have to write more code, - Steve McConnell, "Code Complete"`
+    
+    - Old Code:
+        ```angular2html
+        private bool ValidUsername(string username)
+        {
+            bool isValid = false;
+            const int MinUsernameLength = 6;
+            if (username.Length >= MinUsernameLength)
+            {
+                const int MaxUsernameLength = 25;
+                if (username.Length <= MaxUsernameLength)
+                {
+                   bool isAlphaNumeric = username.All(char.IsLetterOrDigit);
+                   if (isAlphaNumeric)
+                   {
+                       if (!ContainCurseWords(username))
+                       {
+                           isValid = IsUniqueUsername(username);
+                       }
+                   }
+                }
+            }
+            return isValid;
+        }
+        ```
+    - After Refactor:
+      ```angular2html
+      const int MinUsernameLength = 6;
+      if (username.Length < MinUsernameLength) return false;
+
+      const int MaxUsernameLength = 25;
+      if (username.Length > MaxUsernameLength) return false;
+
+      bool isAlphaNumeric = username.All(char.IsLetterOrDigit);
+      if (!isAlphaNumeric) return false;
+
+      if (ContainCurseWords(username)) return false;
+
+      return IsUniqueUsername(username);
+      ```
