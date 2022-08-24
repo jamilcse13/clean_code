@@ -1,12 +1,15 @@
 # Clean Code
+Code is clean if it can be understood easily – by everyone on the team. Clean code can be read and enhanced by a developer other than its original author. With understandability comes readability, changeability, extensibility and maintainability.<br/>
+We have tried to discuss on **Clean Code** below. **C#** will be using as coding example.
 
 ## Why Writing Clean Code Matters
 ### Reasons of Writing Clean Code:
-* Reading is harder than writing
-* Technical debt is depressing
-* You're lazy
-* Sloppy = Slow
-* Don't be a verb
+* 5 reasons to care
+  * Reading is harder than writing
+  * Technical debt is depressing
+  * You're lazy
+  * Sloppy = Slow
+  * Don't be a verb
 
 ## Clean Code Principles
 1. Right tool for the job
@@ -700,4 +703,26 @@ return total;
   * Fields used by only one method
   * Classes that change often
 
+### Low vs High Cohesion:
+**_Low Cohesion:_**
+- In a **Vehicle** class, these methods are exist.
+    - Edit vehicle options
+    - Update pricing
+    - Schedule maintain
+    - Send maintenance reminder
+    - Select financing
+    - Calculate monthly payment
+
+**_High Cohesion:_**
+- We have maintained separate classes for separate methods based on responsibility.
+- We create 3 classes for maintaining these methods
+  - **Vehicle:**
+    - Edit vehicle options
+    - Update pricing
+  - **VehicleMaintenance:**
+    - Schedule maintain
+    - Send maintenance reminder
+  - **VehicleFinance:**
+    - Select financing
+    - Calculate monthly payment
 
