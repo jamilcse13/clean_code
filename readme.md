@@ -726,3 +726,23 @@ return total;
     - Select financing
     - Calculate monthly payment
 
+
+### Primitive Obsession:
+* Bad Approach:
+    - It breaks the Rule of 7
+    ```javascript
+    private void SaveUser(string firstname, string lastname, string state
+    string zip, string eyeColor, string phone, string fax, string maidenName)
+    ```
+
+* Good Approach:
+    - The parameters are the clearly properties of a user
+    - So the best way to resolve the approach is: pass the user object
+    - Benefits:
+      - Helps reader conceptualize
+      - implicit -> explicit
+      - Encapsulation: Adding another property doesn't impact the method signature
+      - Easily find all references to the user object in code
+    ```javascript
+    private void SaveUser(User user)
+    ```
