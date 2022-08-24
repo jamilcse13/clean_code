@@ -858,3 +858,99 @@ public CalculateTotalCharges()
 * Don't repeat yourself (DRY)
 
 
+### Intent Comment:
+* Bad Approach:
+    ```javascript
+    // Assure user's account is deactivated
+    if (user.Status == 2)
+    {
+    }
+    ```
+* Good Approach:
+    ```javascript
+    if (user.Status == Status.Inactive)
+    {
+    }
+    ```
+* Can often eliminate intent comments via a well-named constant or enum.
+* Clarify intent without comments:
+  * Improve function name
+  * Declare intermediate variable
+  * Declare a constant or enum
+  * Extract conditional to function
+
+
+### Apology Comments:
+```javascript
+// Sorry, this crashes sometimes so i'm swallowing the exception
+
+// I was tried to refactor this pile when I was done...
+```
+* Suggestions:
+  * Don't apologize
+  * Fix it before commit/merge
+  * Add a TODO marker comment if you can't fix it that time
+
+
+### Warning comments:
+```javascript
+// Here be dragons - see Bob
+
+// Great sins against code below...
+```
+
+
+### Zombie Code:
+`The code that are commented out code are zombie code`
+```javascript
+private bool ValidUsername(string username)
+{
+    bool isValid = false;
+    const int MinUsernameLength = 6;
+    if (username.Length >= MinUsernameLength)
+    {
+        const int MaxUsernameLength = 25;
+        // bool isAlphaNumeric = username.All(char.IsLetterOrDigit);
+        // if (isAlphaNumeric)
+        // {
+        //     if (!ContainCurseWords(username))
+        //     {
+        //         isValid = IsUniqueUsername(username);
+        //     }
+        // }
+        if (username.Length <= MaxUsernameLength)
+        {
+           bool isAlphaNumeric = username.All(char.IsLetterOrDigit);
+           if (isAlphaNumeric)
+           {
+               if (!ContainCurseWords(username))
+               {
+                   isValid = IsUniqueUsername(username);
+               }
+           }
+        // if (!ContainCurseWords(username))
+        // {
+        //     isValid = IsUniqueUsername(username);
+        // }
+        }
+    }
+    return isValid;
+}
+```
+- Zombie code is not really "dead".
+- Commented code is "alive" because it's still in the code. It effects searches and refactoring.
+- Causes for the ongoing problem of zombie code
+  - **Risk Aversion**
+    - Developers think they use code next time which is not needed now, so they comment it out.
+  - **Hoarding Mentality**
+    - Developers comment out code just in case it might be useful to someone later
+    - They should remember: _With source control, deleted code can be retrieved later if needed_
+
+- Zombie code:
+  - Reduces readability
+  - Created ambiguity
+  - Hinders refactoring
+  - Add noise to searches
+  - Code is not "lost" anyway
+
+
