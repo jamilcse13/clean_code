@@ -954,3 +954,103 @@ private bool ValidUsername(string username)
   - Code is not "lost" anyway
 
 
+### Divider comment:
+* avoid this way
+* if functions are too long, refactor it to separate the function with multiple functions
+```javascript
+private void myLongFunction()
+{
+    // lots
+    // of
+    // codes
+    
+    // Start search for available concert tickets
+
+    // lots
+    // of
+    // concert
+    // search
+    // codes
+    
+    // End of concert ticket search
+    
+    // lots
+    // more
+    // code
+}
+```
+
+
+### Brace Tracker Comment:
+* These comments use for tracing long statements brace
+* Long coding are the only reason to use this comment
+* with Brace Tracker Comment:
+    ```javascript
+    private void AuthenticateUsers()
+    {
+        bool validLogin = false;
+        // deeply
+          // nested
+            // code
+            if (validLogin)
+            {
+                // lots
+                // of
+                // codes
+                // here
+            } // end user login
+          // even
+        // more code
+    }
+    ```
+* After Refactor:
+    ```javascript
+    private void AuthenticateUsers()
+    {
+        bool validLogin = false;
+        // deeply
+          // nested
+            // code
+            if (validLogin)
+            {
+                loginUser();
+            }
+          // even
+        // more code
+    }
+    ```
+  
+    - Benefits:
+      - Enhances readability
+      - Reduces cyclomatic complexity
+
+
+### Clean Comments:
+**_To Do Comments:_**
+```javascript
+// TODO Refactor out duplication
+// HACK The API doesn't expose needed call yet
+```
+* Maintain:
+  * Standardize
+  * Watch Out:
+    * Maybe an apology or warning comment in disguise
+    * Often ignored
+
+**_Summary Comments:_**
+```javascript
+// Encapsulates logic for calculating retire benefits
+// Generates custom newslatter emails
+```
+* Maintain:
+    * Describe intent at general level higher than the code
+    * Often useful to provide high level overview of classes
+    * **Risk:** Don't use to simply augment poor naming
+
+
+**_Documentation:_**
+```javascript
+// See microsoft.com/api for documentation
+```
+* Maintain:
+    * Useful when it can't be expressed in code
