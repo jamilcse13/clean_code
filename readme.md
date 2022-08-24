@@ -746,3 +746,56 @@ return total;
     ```javascript
     private void SaveUser(User user)
     ```
+
+### Proximity Principle:
+* Try to maintain top down method for the methods which are called from another method
+* Make code read top to bottom when possible. keep related actions together.
+    ```javascript
+    public void validateRegistration()
+    {
+        validateData();
+        if (!SpeakerMeetOurRequirements())
+        {
+            // code here
+        }
+    }
+    
+    private void validateData()
+    {
+        // code here
+    }
+    
+    private void SpeakerMeetOurRequirements()
+    {
+        // code here
+    }
+    ```
+
+### Outline Rule:
+* Multiple layers of abstraction
+* Should read like a high-level outline
+* **Not Do:**
+  * Method 1
+    * method 1a
+      * method 1ai
+      * method 1aii
+      * method 1aiii
+    * method 1b
+    * method 1c
+
+
+* **Do:**
+    * Method 1
+        * Method 1a
+            * Method 1ai
+            * Method 1aii
+        * Method 1b
+          * Method1bi
+          * Method1bii
+        * Method 1c
+    * Method 2
+      * Method 2a
+      * Method 2b
+    * Method 3
+      * Method 3a
+      * Method 3b
