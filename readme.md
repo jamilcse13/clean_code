@@ -3,6 +3,7 @@ Code is clean if it can be understood easily – by everyone on the team. Clean 
 We have tried to discuss on **Clean Code** below. **C#** will be using as coding example.
 
 ## Why Writing Clean Code Matters
+****
 ### Reasons of Writing Clean Code:
 * 5 reasons to care
   * Reading is harder than writing
@@ -37,6 +38,7 @@ We have tried to discuss on **Clean Code** below. **C#** will be using as coding
 
 
 ## Naming
+****
 ### Why Naming Matters:
 * To maintain code readability
 * To avoid variable confliction
@@ -137,6 +139,7 @@ return total;
     ```
     
 ## Writing Conditionals That Convey Intent
+****
 ### Boolean Assignments:
 * Bad way:
     ```javascript
@@ -378,6 +381,7 @@ return total;
   ```
   
 ## Writing Clean Methods
+****
 ### When To Create a Function
 - **_Function vs Method:_**
     - Both functions and methods are pieces of code, called by name
@@ -674,6 +678,7 @@ return total;
     ```
 
 ## Writing Clean Classes
+****
 ### When To Create a Class:
 * New Concept
   * Abstract or real-world
@@ -799,3 +804,57 @@ return total;
     * Method 3
       * Method 3a
       * Method 3b
+
+
+## Writing Clean Comments
+****
+**Remind two points:**
+- Prefer expressive code over comments
+- Use comments when code is not sufficient
+
+**Comments to Avoid:**
+- Redundant
+- Intent
+- Apology
+- Warning
+- Zombie Code
+- Divider
+- Brace Tracker
+- Bloated Header
+- Defect Log
+
+Let's go ahead and walk through these points one by one.
+
+
+### Redundant Comments:
+```javascript
+int i = 1   // Set i = 1
+
+var cory = new User()   // Instantiate a new user
+
+// <summary>
+// Default Constructor
+// </summary>
+public User()
+{
+}
+
+// <summary>
+// Calculates Total Charges
+// </summary>
+public CalculateTotalCharges()
+{
+    // Total charges calculated here
+}
+```
+
+**_Problem with Redundant Comments:_**
+* Break the **DRY** principle. They are needless repetition.
+* Comments lower the signal-to-noise ration.
+* It is not necessary to add a comment on every single method, if your method name is well.
+
+**_Two Rules to Avoid Redundant Comments:_**
+* Assume your reader can read code
+* Don't repeat yourself (DRY)
+
+
