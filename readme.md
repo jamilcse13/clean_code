@@ -208,7 +208,7 @@ return total;
 - **_Intermediate Variables_**:
   * Bad approach:
       ```javascript
-      if (employee.Age >55
+      if (employee.Age > 55
       && employee.YearsEmployed > 10
       && employee.IsRetired == true)
       {
@@ -217,11 +217,11 @@ return total;
       ```
   * Good approach:
       ```javascript
-      bool eligibleFOrPension = employee.Age >55
+      bool eligibleForPension = employee.Age > 55
       && employee.YearsEmployed > 10
       && employee.IsRetired == true;
     
-      if (eligibleFOrPension)
+      if (eligibleForPension)
       {
           // body here
       }
